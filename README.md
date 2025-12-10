@@ -11,7 +11,7 @@ Cyclistic is a bike-share company in Chicago. The Director of Marketing believes
 * **Cyclistic Executive Team:** The decision-makers who must approve the recommended marketing program.
 
 ## Data Sources
-The analysis utilizes the previous 12 months of historical trip data made publicly available by Motivate International Inc. The dataset includes ride start/end times, station names, and rider type (casual vs. member).
+The analysis utilizes the previous 12 months of historical trip data made publicly available by Motivate International Inc here: https://divvy-tripdata.s3.amazonaws.com/index.html. The dataset includes ride start/end times, station names, and rider type (casual vs. member).
 
 **Data Constraints:**
 Data-privacy issues prohibit the use of personally identifiable information. We cannot connect pass purchases to credit card numbers to determine if casual riders live in the service area.
