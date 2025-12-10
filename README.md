@@ -1,94 +1,65 @@
-# Cyclistic Bike-Share Case Study: How Does a Bike-Share Navigate Speedy Success?
+# Cyclistic Bike-Share Analysis Case Study
 
-## Introduction
-This project is part of my independent learning for the Google Data Analytics Capstone on Coursera. In this case study, I take on the role of a junior data analyst on the Cyclistic marketing analytics team. The goal is to analyze historical bike trip data to understand how annual members and casual riders use Cyclistic bikes differently, and to support the development of marketing strategies to convert casual riders into annual members.
+## Project Overview
+This project is part of the Google Data Analytics Professional Certificate. The goal is to analyze historical bike trip data to identify trends in how different customer types utilize Cyclistic bikes. The analysis will guide marketing strategies aimed at converting casual riders into annual members.
 
 ## Business Task
-Cyclistic’s director of marketing has identified the need to maximize the number of annual memberships for future growth. My task is to analyze usage differences between annual members and casual riders and provide data-driven recommendations to help convert casual riders into annual members.
+Cyclistic is a bike-share company in Chicago. The Director of Marketing believes the company’s future success depends on maximizing the number of annual memberships. The marketing analytics team wants to understand how "Casual" riders (single-ride or full-day pass users) and "Annual Members" use Cyclistic bikes differently.
 
----
-
-## Key Questions
-1. How do annual members and casual riders use Cyclistic bikes differently?
-2. Why would casual riders buy Cyclistic annual memberships?
-3. How can Cyclistic use digital media to influence casual riders to become members?
----
+**The Stakeholders:**
+* **Lily Moreno:** Director of Marketing.
+* **Cyclistic Executive Team:** The decision-makers who must approve the recommended marketing program.
 
 ## Data Sources
-- Cyclistic historical trip data: 12 months of bike trip data provided for the case study (CSV format).
-- Key columns: `ride_id`, `rideable_type`, `started_at`, `ended_at`, `start_station_name`, `end_station_name`, `member_casual`, etc.
-- Data privacy: No personally identifiable information is included, in accordance with privacy guidelines[1].
----
+The analysis utilizes the previous 12 months of historical trip data made publicly available by Motivate International Inc. The dataset includes ride start/end times, station names, and rider type (casual vs. member).
 
-## Data Preparation
-- Downloaded the previous 12 months of Cyclistic trip data.
-- Organized files into folders for original and working datasets.
-- Opened CSV files in Excel/Google Sheets and saved as spreadsheet files for analysis.
-- Created new columns:
-  - `ride_length`: Calculated as `ended_at` minus `started_at`.
-  - `day_of_week`: Calculated using the date of each ride’s start time.
-- Ensured consistent formatting and checked for missing or duplicate data[1].
----
-
-## Data Processing
-- Removed duplicates and rows with missing critical data.
-- Standardized date, time, and member type columns.
-- Verified data integrity through sorting, filtering, and summary statistics.
-- Documented all cleaning steps for reproducibility[1].
----
-
-## Analysis Approach
-- Aggregated data by user type (`member_casual`) to compare usage patterns.
-- Calculated descriptive statistics (mean, max, count) for ride length and ride frequency.
-- Used pivot tables to analyze:
-  - Average ride length by user type and day of week.
-  - Number of rides by user type and day of week.
-- Merged monthly data for a full-year view and exported summary files for visualization.
----
-
-## Sharing Results
-- Created visualizations (bar charts, line graphs, etc.) to compare annual members and casual riders.
-- Focused on clear, accessible presentation of findings, using appropriate labels and formatting.
-- Included all visualizations and summary tables in the `/visuals` folder of this repository.
----
-
-## Key Findings
-- (Insert your actual findings here after analysis, e.g.: “Annual members tend to take shorter, more frequent rides on weekdays, while casual riders take longer rides, often on weekends.”)
-- (Summarize any notable trends or differences you discovered.)
----
-
-## Recommendations
-Based on the analysis, my top three recommendations are:
-1. (Insert your recommendation #1, e.g.: “Promote membership benefits at stations and times popular with casual riders.”)
-2. (Insert your recommendation #2, e.g.: “Offer targeted digital promotions to frequent casual riders.”)
-3. (Insert your recommendation #3, e.g.: “Highlight cost savings and convenience of membership in digital campaigns.”)
----
+**Data Constraints:**
+Data-privacy issues prohibit the use of personally identifiable information. We cannot connect pass purchases to credit card numbers to determine if casual riders live in the service area.
 
 ## Tools Used
-- Excel or Google Sheets (data cleaning, analysis, visualization)
-- Markdown (documentation)
-- (Optional: Tableau, Google Data Studio, or other visualization tools)
----
+* **Python (Pandas):** For data cleaning, manipulation, and aggregation.
+* **Matplotlib & Seaborn:** For data visualization.
+* **Jupyter Notebook / Google Colab:** For executing the analysis script.
 
-## Repository Structure
-```
-Cyclistic-Case-Study/
-│
-├── data/
-│   └── (Cleaned data files)
-├── visuals/
-│   └── (Charts and graphs)
-├── README.md
-```
----
+## Data Cleaning & Processing
+To prepare the data for analysis, the following steps were taken:
+1.  **Data Merging:** Concatenated 12 separate monthly CSV files into a single dataframe.
+2.  **Date Formatting:** Converted `started_at` and `ended_at` columns to datetime objects.
+3.  **Feature Engineering:**
+    * Calculated `ride_length_minutes` by subtracting start time from end time.
+    * Extracted `day_of_week` and `hour` to analyze temporal trends.
+4.  **Data Cleaning:**
+    * Removed rides with a duration of less than 1 minute (false starts) or negative durations (system errors).
 
-## About This Project
-- Completed independently as part of the Google Data Analytics Capstone on Coursera.
-- All analysis and recommendations are based on the provided dataset and case study instructions.
-- No confidential or personally identifiable information is included.
----
+## Analysis & Visualizations
 
-**This project demonstrates my ability to follow a structured data analysis process (Ask, Prepare, Process, Analyze, Share, Act) and communicate actionable insights for real-world business questions.**
----
+### 1. Total Rides by Day of Week
+![Total Rides by Day of Week](images/total_rides_day.png)
 
-*For more details, see the official case study instructions provided by Coursera and referenced in this repository.*
+**Key Insight:**
+* **Annual Members** exhibit higher usage on weekdays (Tuesday through Thursday), indicating that they primarily use the service for commuting to and from work.
+* **Casual Riders** usage peaks significantly on Saturdays and Sundays, suggesting they use the service primarily for leisure and weekend activities.
+
+### 2. Average Ride Duration by Rider Type
+![Average Ride Duration](images/average_duration.png)
+
+**Key Insight:**
+* There is a drastic difference in ride duration between the two groups.
+* **Casual Riders** take rides that are significantly longer than members on average (often 2x longer). This reinforces the theory that casual users are riding for leisure or sightseeing, while members are focused on efficiency (getting from point A to point B).
+
+### 3. Hourly Usage Patterns
+![Hourly Usage Patterns](images/hourly_usage.png)
+
+**Key Insight:**
+* **Members** show two distinct spikes in usage: 8:00 AM and 5:00 PM. This confirms the hypothesis that members use the bikes for daily work commutes.
+* **Casual Riders** show a consistent increase throughout the day, peaking in the late afternoon/early evening and on weekends, consistent with recreational use rather than commuting.
+
+## Recommendations
+Based on the analysis of how casual riders and annual members use the bikes differently, the following marketing strategies are recommended to convert casual riders into members:
+
+1.  **Introduce a "Weekend Warrior" Membership:** Since casual usage peaks on weekends, create a special membership tier that offers unlimited rides on Saturdays and Sundays at a competitive price point.
+2.  **Targeted Digital Campaigns:** Utilize digital media to target casual riders during peak leisure hours (weekends and afternoons) with messages emphasizing the cost-savings of membership for frequent weekend trips.
+3.  **Commuter Incentives:** To bridge the gap between leisure and utility, offer casual riders a discount on their first month of membership if they complete a ride during weekday rush hours (7-9 AM or 4-6 PM).
+
+## Conclusion
+The data clearly shows that Annual Members and Casual Riders are distinct segments with different motivations. Members value utility and efficiency for commuting, while Casual riders value leisure and recreation. Marketing efforts should focus on bridging this gap by showing Casual riders the value of membership for their specific leisure habits.
